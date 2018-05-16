@@ -24,6 +24,7 @@
 	ul{
 		width: 100%;
 		margin: 0 auto;
+		text-align:center;
 	}
 	
 	li{
@@ -60,17 +61,18 @@
 </style>
 </head>
 <body>
+<!--<li><a href="/WEB-INF/views/addEmp.jsp">직원 추가</a></li> 클라이언트에서 바로 webinf에 접근이 막혀있다
+		그 이유는 보호해야하는 위치... -->
 <div class="wrap">
 	<h1>직원 관리 시스템</h1>
 </div>
 	<ul class="clearfix">
-		<!--<li><a href="/WEB-INF/views/addEmp.jsp">직원 추가</a></li> 클라이언트에서 바로 webinf에 접근이 막혀있다
-		그 이유는 보호해야하는 위치... -->
+		
 		<li><a href="SaveServlet">직원 추가</a></li>
 		<li><a href="ListPage?page=1">직원 조회</a></li>
-		<li><a href="/WEB-INF/views/delete.jsp">Profile</a></li>
+		<li><a href="ProfileServlet">Profile</a></li>
 		<li><a href="LogoutServlet">로그아웃</a></li>
-		<li><a href="/WEB-INF/views/login.jsp">로그인</a></li>
+		<li><a href="LoginServlet">로그인</a></li>
 	</ul>
 </body>
 </html>

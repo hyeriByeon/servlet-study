@@ -231,4 +231,40 @@ public class EmployeeDaoImpl implements EmployeeService {
 		return list;
 	}
 
+	@Override
+	public int maxPage() {
+	
+      int count=0;
+	      try {
+	         
+
+		Connection conn = getConn();
+	         
+	         if (conn != null) {
+	            } else {
+	                System.out.println("DB연결 실패 - maxpage");
+	            }
+
+	         PreparedStatement pstmt = conn.prepareStatement("SELECT count(*) FROM user");
+	         
+	         ResultSet rs = pstmt.executeQuery();
+	         while (rs.next()) {
+	            count = rs.getInt("count(*)");
+	         }
+	         
+	         rs.close();
+	         pstmt.close();
+	         conn.close();
+	      }  catch (SQLException e) {
+	         // TODO �ڵ� ������ catch ���
+	         e.printStackTrace();
+	      }
+	      int maxpage=count/pager;
+	      if(count%pager!=0) {//나머지가 있으면
+	         maxpage++;
+	      }
+	      return maxpage;
+		   
+	}
+
 }

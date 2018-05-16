@@ -67,5 +67,11 @@ public class LoginServlet extends HttpServlet{
 //			RequestDispatcher rd = request.getRequestDispatcher("login.html");
 //			rd.include(request, response);// 포함해서 ..
 //		}
+		
 	}
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+	}
+	
 }

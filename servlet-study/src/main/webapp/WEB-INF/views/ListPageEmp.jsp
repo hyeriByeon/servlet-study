@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.*" %>
+<%@ page import="org.study.dao.Employee" %>
+<%@ page import="org.study.dao.EmployeeDaoImpl" %>
+<%@ page import="org.study.dao.EmployeeService" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +15,7 @@
 <title>Insert title here</title>
 </head>
 <jsp:include page ="/link.html" flush="false" />
+<% EmployeeService service = new EmployeeDaoImpl(); %>
 <style>
 	body{
 		width: 100%;
@@ -41,13 +48,17 @@
 		width: 50px;
 	}
 	.page{
-		width:200px;
-		margin: 0 auto;
+		width:600px;
+		
+		position: absolute;
+		left: 36%;
+		text-align:center;
+		margin: 10px auto 0 auto;
 	}
 	.page li{
 		background-color:#fff;
-		width: 18px;
-		height:18px;
+		width: 25px;
+		height:25px;
 	}
 	
 	.page a{
@@ -57,6 +68,12 @@
 	h1{
 		margin-top: 10px;
 		text-align:center;
+	}
+	
+	.btn{
+		background-color:#3d3d3d;
+		border:0;
+		color:#fff;
 	}
 </style>
 <body>
@@ -83,11 +100,25 @@
 			</c:forEach>
 		</table>
 	</div>
-	<div>
-		<ul class="clearfix page">
-		<c:forEach begin="1" end="10" var="p">
-			<li><a href="/ListPage?page=${p } ">${p}</a></li>
-		</c:forEach>
+	<div class="page">
+<% 
+	int a=Integer.parseInt(request.getParameter("page"));
+	int pagestart=1+((a-1)/10)*10;
+	if(pagestart!=1){%>
+		<ul>
+			<li><a href="/ListPage?page=<%=pagestart-1%>">
+			<input type="button" value="<<" class="btn btn-sm btn-info"></a></li>
+<%}
+	for(int i=pagestart;i<pagestart+10&&i<=service.maxPage();i++){ %>
+	   <li>
+	   <a href="/ListPage?page=<%=i%>" class="pageidx"><%=i%></a></li>
+	<%} 
+if(pagestart+10<service.maxPage()){%>
+		<li>
+		<a href="/ListPage?page=<%=pagestart+10%>">
+		<input type="button" value=">>" class="btn btn-sm btn-info"></a>
+		</li>
+<%} %>
 		</ul>
 	</div>
 </body>

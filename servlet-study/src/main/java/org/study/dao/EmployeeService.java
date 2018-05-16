@@ -11,5 +11,6 @@ public interface EmployeeService {
 	public List<Employee> listEmployeeByPage(int page);
 	public boolean deleteEmployee(int id);
 	public boolean updateEmployee(Employee e);
+	public int maxPage();
 }
 	
